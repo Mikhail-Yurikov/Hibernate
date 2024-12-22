@@ -19,7 +19,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Session session = Util.getSessionFactory().openSession();
         session.beginTransaction();
         session.createSQLQuery("create table IF NOT EXISTS users (id SERIAL PRIMARY KEY, name varchar(50), lastName varchar(50), age smallint not null )")
-                .addEntity(User.class).executeUpdate();
+                .executeUpdate();
         session.getTransaction().commit();
         session.close();
 
@@ -30,6 +30,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Session session = Util.getSessionFactory().openSession();
         session.beginTransaction();
         session.createSQLQuery("DROP TABLE IF EXISTS users CASCADE").executeUpdate();
+        session.getTransaction().commit();
         session.close();
     }
 
